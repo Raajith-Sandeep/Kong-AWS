@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+
+  kong:
+    image: kong:latest
+
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /kong.yml
+
+    volumes:
+      - ./kong.yml:/kong.yml
+
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+
+  user-service:
+    build: ./user-service
+
+  product-service:
+    build: ./product-service
